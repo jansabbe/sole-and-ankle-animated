@@ -20,12 +20,12 @@ const Header = () => {
           <Logo />
         </LogoWrapper>
         <DesktopNav>
-          <NavLink href="/sale">Sale</NavLink>
-          <NavLink href="/new">New&nbsp;Releases</NavLink>
-          <NavLink href="/men">Men</NavLink>
-          <NavLink href="/women">Women</NavLink>
-          <NavLink href="/kids">Kids</NavLink>
-          <NavLink href="/collections">Collections</NavLink>
+          <FlippingNavLink href="/sale">Sale</FlippingNavLink>
+          <FlippingNavLink href="/new">New&nbsp;Releases</FlippingNavLink>
+          <FlippingNavLink href="/men">Men</FlippingNavLink>
+          <FlippingNavLink href="/women">Women</FlippingNavLink>
+          <FlippingNavLink href="/kids">Kids</FlippingNavLink>
+          <FlippingNavLink href="/collections">Collections</FlippingNavLink>
         </DesktopNav>
         <MobileActions>
           <ShoppingBagButton>
@@ -115,15 +115,51 @@ const Filler = styled.div`
 `;
 
 const NavLink = styled.a`
-  font-size: 1.125rem;
-  text-transform: uppercase;
+  display: block;
+  position: relative;
   text-decoration: none;
+  overflow: hidden;
+  
   color: var(--color-gray-900);
-  font-weight: ${WEIGHTS.medium};
-
   &:first-of-type {
     color: var(--color-secondary);
   }
+  
 `;
+const DefaultNavLink = styled.div`
+  font-size: 1.125rem;
+  text-transform: uppercase;
+
+  transition: transform 400ms ease-in-out;
+  ${NavLink}:hover &, ${NavLink}:focus-visible & {
+    transition: transform 200ms ease-in-out;
+  }
+`
+const InactiveNavLink = styled(DefaultNavLink)`
+  font-weight: ${WEIGHTS.medium};
+
+  ${NavLink}:hover &, ${NavLink}:focus-visible & {
+    transform: translateY(-100%);
+  }
+
+`
+const ActiveNavLink = styled(DefaultNavLink)`
+  font-weight: ${WEIGHTS.bold};
+  position: absolute;
+  inset: 0;
+
+  transform: translateY(100%);
+  ${NavLink}:hover &, ${NavLink}:focus-visible & {
+    transform: translateY(0);
+  }
+`
+
+const FlippingNavLink = ({children,...props}) => {
+  return <NavLink {...props}>
+    <InactiveNavLink>{children}</InactiveNavLink>
+    <ActiveNavLink aria-hidden>{children}</ActiveNavLink>
+  </NavLink>
+}
+
 
 export default Header;
