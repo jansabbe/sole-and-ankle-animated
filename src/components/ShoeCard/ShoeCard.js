@@ -126,13 +126,10 @@ const SalePrice = styled.span`
 
 const Flip = keyframes`
   0% {
-    transform: scaleY(1) rotateX(0deg);
-  }
-  99.9% {
-    transform: scaleY(1) rotateX(-180deg);
+    transform: rotateY(180deg);
   }
   100% {
-    transform: scaleY(-1) rotateX(-180deg);
+    transform: rotateY(0deg);
   }
 `
 
@@ -148,10 +145,12 @@ const Flag = styled.div`
   font-weight: ${WEIGHTS.bold};
   color: var(--color-white);
   border-radius: 2px;
+  transform-style: preserve-3d;
 
   ${Link}:hover &, ${Link}:focus-visible & {
-    animation: ${Flip} 300ms linear;
+    animation: ${Flip} 300ms ease-out;
     animation-delay: 100ms;
+    
   }
 `;
 
