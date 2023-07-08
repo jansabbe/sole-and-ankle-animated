@@ -4,6 +4,7 @@ import styled from 'styled-components/macro';
 import { WEIGHTS } from '../../constants';
 import { formatPrice, pluralize, isNewShoe } from '../../utils';
 import Spacer from '../Spacer';
+import {keyframes} from "styled-components";
 
 const ShoeCard = ({
   slug,
@@ -77,6 +78,8 @@ const Wrapper = styled.article``;
 
 const ImageWrapper = styled.div`
   position: relative;
+  perspective: 150px;
+  perspective-origin: 80% 10%;
 `;
 
 const ImageCutoff = styled.div`
@@ -121,6 +124,18 @@ const SalePrice = styled.span`
   color: var(--color-primary);
 `;
 
+const Flip = keyframes`
+  0% {
+    transform: scaleY(1) rotateX(0deg);
+  }
+  99.9% {
+    transform: scaleY(1) rotateX(-180deg);
+  }
+  100% {
+    transform: scaleY(-1) rotateX(-180deg);
+  }
+`
+
 const Flag = styled.div`
   position: absolute;
   top: 12px;
@@ -133,6 +148,11 @@ const Flag = styled.div`
   font-weight: ${WEIGHTS.bold};
   color: var(--color-white);
   border-radius: 2px;
+
+  ${Link}:hover &, ${Link}:focus-visible & {
+    animation: ${Flip} 300ms linear;
+    animation-delay: 100ms;
+  }
 `;
 
 const SaleFlag = styled(Flag)`
