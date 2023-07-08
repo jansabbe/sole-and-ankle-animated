@@ -87,7 +87,7 @@ const Content = styled(DialogContent)`
   animation-delay: 80ms;
   animation: ${FadeIn} 300ms ease-out backwards;
   @media (prefers-reduced-motion: no-preference) {
-    animation: ${SlideIn} 300ms ease-out backwards;
+    animation: ${SlideIn} 320ms cubic-bezier(.38,.1,.32,.76) backwards;
   }
 `;
 
@@ -96,11 +96,11 @@ const ModalFadeIn = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100%;
-  animation-delay: 200ms;
+  animation-delay: 320ms;
   will-change: transform, opacity;
-  animation: ${FadeIn} 400ms ease-out backwards;
+  animation: ${FadeIn} 300ms ease-out backwards;
   @media (prefers-reduced-motion: no-preference) {
-    animation: ${FadeSlideIn} 400ms ease-out backwards;
+    animation: ${FadeSlideIn} 500ms ease-out backwards;
   }
 `
 
